@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import IntlTelInput from 'react-intl-tel-input'
 import 'react-intl-tel-input/dist/main.css'
 
-import { ReactComponent as Mark } from './excl.svg'
-
 
 export default class Regform extends Component {
     constructor(props) {
@@ -90,16 +88,10 @@ export default class Regform extends Component {
             }
         }
         else if (this.props.step === 2){
-            if (this.state.confirm_password === this.state.password) {
-                paramsToValidate = {
-                    password: this.state.password
-                }
-            } else {
-                this.setState({
-                    errors: ['Passwords do not match']
-                })
-                return this.state.errors
-            }
+
+            paramsToValidate = {
+                password: this.state.password
+            };
 
             let submitPassword = this.props.validateParams(paramsToValidate);
 
@@ -127,7 +119,7 @@ export default class Regform extends Component {
                 };
                 let submitPhone = this.props.validateParams(paramsToValidate);
                 if (submitPhone.success) {
-                    this.props.setLeadData(paramsToValidate).then(this.props.handleSubmit(), this.props.handleStep(this.props.step + 1));
+                    this.props.setLeadData(paramsToValidate).then(this.props.handleSubmit(), this.props.handleStep(this.props.step));
                     this.setState({
                         errors: []
                     });
@@ -224,19 +216,6 @@ export default class Regform extends Component {
         if (this.props.step <= 3) {
             return (
                 <div className={"Regform " + (this.props.class ? this.props.class : '')}>
-                    <div className="steps">
-                        {[1,2,3].map(index => {
-                            if(index <= this.props.step-1) {
-                                return (
-                                    <div className="num check" key={index} index={index} onClick={this.handleBackwards}>✓</div>
-                                )
-                            } else {
-                                return (
-                                    <div className="num" key={index}>{index}</div>
-                                )
-                            }
-                        })}
-                    </div>
                     <div className='inner'>
                         <div className='form-wrapper one'>
                             {this.state.errors && <div className="errors">
@@ -245,7 +224,7 @@ export default class Regform extends Component {
                             <input className="inputfield fname" type="text" name="first_name" placeholder={languageManager.fname} value={first_name} onChange={(e) => this.handleStepChange(e.target.name, e.target.value)}/>
                             <input className="inputfield lname" type="text" name="last_name" placeholder={languageManager.lname} value={last_name} onChange={(e) => this.handleStepChange(e.target.name, e.target.value)}/>
                             <input className="inputfield email" type="text" name="email" placeholder={languageManager.email} autoComplete='off' value={email} onChange={(e) => this.handleStepChange(e.target.name, e.target.value)}/>
-                            <button onClick={this.handleForward} className='start'>{languageManager.button}</button>
+                            <button onClick={this.handleForward} className='red-btn form-btn'>{languageManager.modal_button}</button>
                         </div>
                         <div className='form-wrapper two'>
                             {/*{this.state.errors && <div className="errors">
@@ -254,17 +233,6 @@ export default class Regform extends Component {
                             <div className="forw-wrapper_input">
                                 <input className="inputfield pass" type={this.state.firstPassType} maxLength="8" value={password} onChange={(e) => this.handleStepChange(e.target.name, e.target.value)} name="password" placeholder={languageManager.pass}/>
                                 <span onClick={this.handleClick} data-type="firstPassType" className={this.state.firstPassType === 'password' ? 'show-pass' : 'hide-pass'}></span>
-                            </div>
-                            <div className="help-block">
-                                <div className="help-icon">
-                                    <div className="help-info">
-                                        <p>{languageManager.morebox}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="forw-wrapper_input pass2">
-                                <input className="inputfield pass" type={this.state.secondPassType} maxLength="8" value={confirm_password} onChange={(e) => this.handleStepChange(e.target.name, e.target.value)} name="confirm_password" placeholder={languageManager.pass2}/>
-                                <span onClick={this.handleClick} data-type="secondPassType" className={this.state.secondPassType === 'password' ? 'show-pass' : 'hide-pass'}></span>
                             </div>
                             <ul className='req'>
                                 {Object.keys(languageManager.passtest).map((validationRule, index) =>
@@ -277,7 +245,7 @@ export default class Regform extends Component {
                                     </li>
                                 )}
                             </ul>
-                            <button onClick={this.handleForward} className='start'>{languageManager.button}</button>
+                            <button onClick={this.handleForward} className='red-btn form-btn'>{languageManager.modal_button}</button>
                         </div>
                         <div className='form-wrapper three'>
                             {this.state.errors && <div className="errors">
@@ -301,10 +269,9 @@ export default class Regform extends Component {
                                 }}
                                 value={tel}
                             />
-                            <button onClick={this.handleForward} className='start' >{languageManager.button_last}</button>
+                            <button onClick={this.handleForward} className='red-btn form-btn' >{languageManager.modal_button}</button>
                         </div>
                     </div>
-                    <div className="error"><Mark className='excl'/><span></span></div>
                 </div>
             )
         }else {

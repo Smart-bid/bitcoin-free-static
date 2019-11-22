@@ -76,46 +76,6 @@
     .top-reg {
         margin-top: 40px;
         padding-bottom: 30px;
-
-
-
-
-        .regform {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px #a110cb solid;
-            padding: 10px;
-
-            & .reg-title {
-                text-align: center;
-                background: #201e1f;
-                padding: 20px 20px 35px 20px;
-                color: #a110cb;
-                font-size: 40px;
-                text-transform: uppercase;
-                font-family: 'Oswald', sans-serif;
-                line-height: 40px;
-                font-weight: 500;
-                border-bottom: 4px #a110cb solid;
-                & span {
-                    color: #ffffff;
-                }
-                @media (max-width: 1200px) {
-                    font-size: 28px;
-                    line-height: 30px;
-                }
-            }
-        }
-    }
-
-    & .badges {
-        width: 17%;
-        margin: 0 auto 2vw auto;
-        filter: grayscale(100%);
-
-        @media (max-width: 768px) {
-            width: 80%;
-            margin: 4vw auto 8vw auto;
-        }
     }
 }
 .box_wrap {
@@ -146,6 +106,71 @@ footer {
         padding: 7px 0;
         margin: 0 0 10px;
     }
+}
+
+.FirstRegform {
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 80px;
+    height: 80px;
+    background: url("./status.png") no-repeat center / cover;
+  }
+  .title {
+    margin-bottom: 25px;
+    p {
+      color: #ef1713;
+      padding-left: 80px;
+      font-size: 25px;
+      font-weight: 900;
+      text-align: center;
+      &:first-child {
+        font-size: 30px;
+      }
+    }
+  }
+  .inner {
+    .main-modal-text {
+      margin-bottom: 35px;
+    }
+    p {
+      font-size: 18px;
+      color: #a5a5a5;
+      line-height: 26px;
+      font-weight: 900;
+      text-align: center;
+      span {
+        color: #ef1713;
+      }
+    }
+  }
+  .form-btn {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+  }
+  input {
+    background-color: #dcdcdc;
+    margin-bottom: 15px;
+  }
+}
+
+.modal-dialog {
+  max-width: 100%!important;
+  margin: 0!important;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  padding: 15px 30px;
+  position: relative;
+  max-width: 600px;
 }
 
 .modalscreen {

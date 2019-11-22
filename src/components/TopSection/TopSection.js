@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 
 import Header from './Header/Header'
 import VideoPlayer from './VideoPlayer/VideoPlayer.js'
-import Regform from './Regform/Regform'
+import Modal from 'react-bootstrap/Modal'
+import ModalForm from './ModalForm/ModalForm'
 
 import video from './Regform/bc-freedom.mp4'
 import logo from './logo.png'
@@ -17,29 +18,22 @@ export default class TopSection extends Component {
             date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
 
         this.state = {
-            date: date
+            date: date,
+            showModal: false
         };
-        this.regPanel = React.createRef();
     }
 
-
-    handleScroll() {
-
-        let panel = this.regPanel.current;
-
-        window.scrollTo({
-            top: panel.offsetTop,
-            left: 0,
-            behavior: 'smooth'
-        })
-
-    }
+    onHide = () => this.setState({ showModal: false });
+    handleShow = () => this.setState({ showModal: true });
 
     render() {
         let languageManager = this.props.languageManager();
 
         return (
             <div className='TopSection'>
+                <Modal show={this.state.showModal} onHide={this.onHide}>
+                    <ModalForm {...this.props}/>
+                </Modal>
                 <header>
                     <div className="container-fluid">
                         <div className="row">
@@ -52,8 +46,7 @@ export default class TopSection extends Component {
                                 <img src={timeLogo} alt="timeLogo"/>
                             </div>
                             <div className="col p-0">
-                                <Header languageManager={this.props.languageManager}
-                                        handleScroll={this.handleScroll.bind(this)}/>
+                                <Header languageManager={this.props.languageManager}/>
                             </div>
                         </div>
                     </div>
@@ -74,7 +67,7 @@ export default class TopSection extends Component {
                             <div className="col-12">
                                 <div className="title">
                                     <h1><span>{languageManager.title[0]}</span> {languageManager.title[1]}<br/><span className="text-uppercase">{languageManager.title[2]}</span></h1>
-                                    <button className="red-btn">{languageManager.button}</button>
+                                    <button className="red-btn" onClick={this.handleShow}>{languageManager.button}</button>
                                 </div>
                             </div>
                         </div>
@@ -102,22 +95,6 @@ export default class TopSection extends Component {
                         </div>
                     </div>
                 </footer>
-                {/*<div className="top-reg" id="top">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-8 col-md-7 col-sm-12">
-
-                            </div>
-                            <div className="col-lg-4 col-md-5 col-sm-12">
-                                <div className="regform" ref={this.regPanel}>
-                                    <div className="reg-title">
-                                        <span>{languageManager.topreg1}</span> {languageManager.topreg2}</div>
-                                    <Regform {...this.props} />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>*/}
             </div>
         )
     }

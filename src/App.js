@@ -30,7 +30,6 @@ export default class App extends Component {
         return (
             <div className='App'>
                 <TopSection {...this.props} handleStep={this.handleStep} handleSubmit={this.handleSubmit} step={this.state.step}/>
-
             </div>
         )
     }
