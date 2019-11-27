@@ -4,34 +4,38 @@ import Header from './Header/Header'
 import VideoPlayer from './VideoPlayer/VideoPlayer.js'
 import Modal from 'react-bootstrap/Modal'
 import ModalForm from './ModalForm/ModalForm'
+import moment from 'moment'
 
 import video from './Regform/bc-freedom.mp4'
 import logo from './logo.png'
 import timeLogo from './timeLogoText.jpg'
 import partners from './securStripe.png'
+import SecondModalForm from "./ModalForm/SecondModalForm";
 
 
 export default class TopSection extends Component {
     constructor(props) {
         super(props)
-        let today = new Date(),
-            date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
-
         this.state = {
-            date: date,
-            showModal: false
-        };
+            showSecondModal: false
+        }
     }
 
-    onHide = () => this.setState({ showModal: false });
-    handleShow = () => this.setState({ showModal: true });
+    secondModalShow = () => this.setState({ showSecondModal: true });
+
+    secondModalHide = () => this.setState({ showSecondModal: false });
+
 
     render() {
         let languageManager = this.props.languageManager();
+        const today = new Date();
 
         return (
-            <div className='TopSection'>
-                <Modal show={this.state.showModal} onHide={this.onHide}>
+            <div className='TopSection' onMouseLeave={this.secondModalShow}>
+                <Modal show={this.state.showSecondModal} onHide={this.secondModalHide} dialogClassName="second-modal">
+                    <SecondModalForm {...this.props}/>
+                </Modal>
+                <Modal show={this.props.show} onHide={this.props.handleHide} dialogClassName="first-modal" >
                     <ModalForm {...this.props}/>
                 </Modal>
                 <header>
@@ -55,7 +59,9 @@ export default class TopSection extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-12 video-link">
-                                <div className="video-tittle"><p>{this.state.date}</p></div>
+                                <div className="video-tittle">
+                                    <p>{moment(today).format('dddd, MMMM DD, YYYY')}</p>
+                                </div>
                                 <VideoPlayer link={video}/>
                             </div>
                         </div>
@@ -67,7 +73,7 @@ export default class TopSection extends Component {
                             <div className="col-12">
                                 <div className="title">
                                     <h1><span>{languageManager.title[0]}</span> {languageManager.title[1]}<br/><span className="text-uppercase">{languageManager.title[2]}</span></h1>
-                                    <button className="red-btn" onClick={this.handleShow}>{languageManager.button}</button>
+                                    <button className="red-btn" onClick={this.props.handleShow}>{languageManager.button}</button>
                                 </div>
                             </div>
                         </div>

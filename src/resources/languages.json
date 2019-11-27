@@ -30,6 +30,16 @@
       "$5000",
       " a day profits and your freedom? Get Your Bitcoin Freedom System Software for FREE today"
     ],
+    "secondModal": [
+      "WAIT!",
+      "DON’T LEAVE EMPTY-HANDED"
+    ],
+    "secondModal_description": [
+      "Do you really want to waste your chance to gain ",
+      "$5.000 a day profits and your freedom?",
+      "Get Your Bitcoin Freedom Software FREE today"
+    ],
+    "secondModal_small_text": "We respect your privacy and your information is 100% secure",
     "modal_button": "Register",
     "error_invalid_email": "Error: Invalid email",
     "error_empty_email": "Error: Empty email",

@@ -7,4 +7,9 @@
         color: #39375e;
         font-weight: 800;
     }
+    @media (max-width: 803px) {
+        p {
+            text-align: center;
+        }
+    }
 }

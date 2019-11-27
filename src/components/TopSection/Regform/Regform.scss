@@ -197,6 +197,18 @@ input {
     margin-bottom: 15px;
 }
 
+.response_error {
+    font-size: 20px;
+    color: #ff3215;
+    margin: 20px 0;
+    text-align: center;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .error {
     color: #333;
     pointer-events: none;

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import TopSection from './components/TopSection/TopSection'
+import SecondModalForm from "./components/TopSection/ModalForm/SecondModalForm";
+import Modal from "react-bootstrap/Modal";
 
 
 export default class App extends Component {
@@ -11,10 +13,13 @@ export default class App extends Component {
         this.state = {
             step: 1,
             page: 'main',
+            showModal: false,
+            secondModalShow: false
         };
-
-        this.handleStep = this.handleStep.bind(this);
     }
+
+    handleHide = () => this.setState({ showModal: false });
+    handleShow = () => this.setState({ showModal: true });
 
     handleStep = (step) => {
         this.setState({step})
@@ -22,14 +27,19 @@ export default class App extends Component {
 
     handleSubmit = () => {
         this.props.handleSubmit()
-        .then(() => this.setState({ step: 1 }))
+            .then(res => (res.redirectUrl) ? window.location = res.redirectUrl : this.setState({responseError: res.error}, this.handleStep(this.props.step + 1)))
+    };
+
+    secondModalHide = () => {
+        this.setState({ secondModalShow: false });
+        console.log(this.state);
     };
 
     render() {
 
         return (
             <div className='App'>
-                <TopSection {...this.props} handleStep={this.handleStep} handleSubmit={this.handleSubmit} step={this.state.step}/>
+                <TopSection {...this.props} show={this.state.showModal} handleHide={this.handleHide} handleShow={this.handleShow} handleStep={this.handleStep} handleSubmit={this.handleSubmit} secondModalHide={this.secondModalHide} step={this.state.step} lastError={this.state.responseError}  />
             </div>
         )
     }

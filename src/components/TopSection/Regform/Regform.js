@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import IntlTelInput from 'react-intl-tel-input'
 import 'react-intl-tel-input/dist/main.css'
+import logo from '../logo.png'
 
 
 export default class Regform extends Component {
@@ -72,8 +73,7 @@ export default class Regform extends Component {
                 email: this.state.email,
                 first_name: this.state.first_name,
                 last_name: this.state.last_name,
-                agree_2: this.state.agree_2,
-                funnel_name: window.location.origin,
+                agree_2: this.state.agree_2
             };
             let checkParams = this.props.validateParams(paramsToValidate);
 
@@ -117,9 +117,12 @@ export default class Regform extends Component {
                     phone_number: phone_number,
                     phone_country_prefix: this.state.phone_country_prefix
                 };
+
+                this.props.handleStep(this.props.step + 1)
                 let submitPhone = this.props.validateParams(paramsToValidate);
                 if (submitPhone.success) {
-                    this.props.setLeadData(paramsToValidate).then(this.props.handleSubmit(), this.props.handleStep(this.props.step));
+                    this.props.setLeadData(paramsToValidate)
+                        .then(this.props.handleSubmit)
                     this.setState({
                         errors: []
                     });
@@ -208,7 +211,6 @@ export default class Regform extends Component {
           last_name,
           email,
           password,
-          confirm_password,
           tel
         } = this.state;
         let languageManager = this.props.languageManager();
@@ -276,11 +278,16 @@ export default class Regform extends Component {
             )
         }else {
             return (
-                <div className={"Regform " + (this.props.class ? this.props.class : '')}>
-                    {/*<img src={logo} alt="lodaing" className="loading"/>*/}
+                <div className="Regform">
+                    {(this.props.step === 4) ? <img src={logo} alt="lodaing" className="loading"/> :
+
+                        <div className='column'>
+                            <span className="response_error">{this.props.lastError}</span>
+                            <button className='red-btn' onClick={() => this.props.handleStep(1)}>OK</button>
+                        </div>}
+
                 </div>
             )
-
         }
     }
 }
