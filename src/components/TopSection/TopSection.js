@@ -17,26 +17,21 @@ export default class TopSection extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            showSecondModal: false
+
         }
     }
-
-    secondModalShow = () => this.setState({ showSecondModal: true });
-
-    secondModalHide = () => this.setState({ showSecondModal: false });
-
 
     render() {
         let languageManager = this.props.languageManager();
         const today = new Date();
 
         return (
-            <div className='TopSection' onMouseLeave={this.secondModalShow}>
-                <Modal show={this.state.showSecondModal} onHide={this.secondModalHide} dialogClassName="second-modal">
+            <div className='TopSection'>
+                <Modal show={this.props.showSecondModal} onHide={this.props.secondModalHide} dialogClassName="second-modal">
                     <SecondModalForm {...this.props}/>
                 </Modal>
                 <Modal show={this.props.show} onHide={this.props.handleHide} dialogClassName="first-modal" >
-                    <ModalForm {...this.props}/>
+                    <ModalForm {...this.props} />
                 </Modal>
                 <header>
                     <div className="container-fluid">

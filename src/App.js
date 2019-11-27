@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import TopSection from './components/TopSection/TopSection'
-import SecondModalForm from "./components/TopSection/ModalForm/SecondModalForm";
-import Modal from "react-bootstrap/Modal";
 
 
 export default class App extends Component {
@@ -14,12 +12,14 @@ export default class App extends Component {
             step: 1,
             page: 'main',
             showModal: false,
-            secondModalShow: false
+            showSecondModal: false
         };
     }
 
     handleHide = () => this.setState({ showModal: false });
     handleShow = () => this.setState({ showModal: true });
+    secondModalShow = () => this.setState({ showSecondModal: true, showModal: false });
+    secondModalHide = () => this.setState({ showSecondModal: false });
 
     handleStep = (step) => {
         this.setState({step})
@@ -30,16 +30,11 @@ export default class App extends Component {
             .then(res => (res.redirectUrl) ? window.location = res.redirectUrl : this.setState({responseError: res.error}, this.handleStep(this.props.step + 1)))
     };
 
-    secondModalHide = () => {
-        this.setState({ secondModalShow: false });
-        console.log(this.state);
-    };
-
     render() {
 
         return (
-            <div className='App'>
-                <TopSection {...this.props} show={this.state.showModal} handleHide={this.handleHide} handleShow={this.handleShow} handleStep={this.handleStep} handleSubmit={this.handleSubmit} secondModalHide={this.secondModalHide} step={this.state.step} lastError={this.state.responseError}  />
+            <div className='App'  onMouseLeave={this.secondModalShow}>
+                <TopSection {...this.props} show={this.state.showModal} handleHide={this.handleHide} handleShow={this.handleShow} handleStep={this.handleStep} handleSubmit={this.handleSubmit} secondModalHide={this.secondModalHide} step={this.state.step} lastError={this.state.responseError} showSecondModal={this.state.showSecondModal} showModal={this.secondModalShow} hideModal={this.secondModalHide}  />
             </div>
         )
     }

@@ -223,8 +223,8 @@ export default class Regform extends Component {
                             {this.state.errors && <div className="errors">
                                 {this.state.errors}
                             </div>}
-                            <input className="inputfield fname" type="text" name="first_name" placeholder={languageManager.fname} value={first_name} onChange={(e) => this.handleStepChange(e.target.name, e.target.value)}/>
-                            <input className="inputfield lname" type="text" name="last_name" placeholder={languageManager.lname} value={last_name} onChange={(e) => this.handleStepChange(e.target.name, e.target.value)}/>
+                            <input className="inputfield fname" type="text" name="first_name" placeholder={languageManager.fname} autoComplete='off' value={first_name} onChange={(e) => this.handleStepChange(e.target.name, e.target.value)}/>
+                            <input className="inputfield lname" type="text" name="last_name" placeholder={languageManager.lname} autoComplete='off' value={last_name} onChange={(e) => this.handleStepChange(e.target.name, e.target.value)}/>
                             <input className="inputfield email" type="text" name="email" placeholder={languageManager.email} autoComplete='off' value={email} onChange={(e) => this.handleStepChange(e.target.name, e.target.value)}/>
                             <button onClick={this.handleForward} className='red-btn form-btn'>{languageManager.modal_button}</button>
                         </div>

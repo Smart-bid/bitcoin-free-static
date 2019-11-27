@@ -8,6 +8,7 @@
     "fname": "First name",
     "lname": "Last name",
     "email": "Email",
+    "pass": "Password",
     "passtest": {
       "invalidlength": "The password must be 8 characters long.",
       "nolowercase": "Must contain at least 1 letter.",
